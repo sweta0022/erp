@@ -43,6 +43,11 @@ class Role extends Authenticatable
         return User::where('role_id',$senior_role_id)->get();
     }
 
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
 
 
 

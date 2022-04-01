@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('phone_no')->nullable();;
             $table->integer('role_id');
             $table->integer('parent_id')->default(0);
-            $table->integer('state_id')->default(0);;
-            $table->integer('city_id')->default(0);;
-            $table->integer('zone_id')->default(0);;
+            $table->integer('state_id')->default(0);
+            $table->integer('city_id')->default(0);
+            $table->integer('zone_id')->default(0);
             $table->tinyInteger('status')->default(1)->comment('1 AS ACTIVE; 0 AS INACTIVE');
             $table->rememberToken();
             $table->timestamps();

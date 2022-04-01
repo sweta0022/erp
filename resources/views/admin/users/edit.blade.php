@@ -18,73 +18,7 @@
         </div>
 
             <div class="page-content">
-                <div class="ace-settings-container" id="ace-settings-container">
-                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-                        <i class="ace-icon fa fa-cog bigger-130"></i>
-                    </div>
-
-                    <div class="ace-settings-box clearfix" id="ace-settings-box">
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <div class="pull-left">
-                                    <select id="skin-colorpicker" class="hide">
-                                        <option data-skin="no-skin" value="#438EB9">#438EB9</option>
-                                        <option data-skin="skin-1" value="#222A2D">#222A2D</option>
-                                        <option data-skin="skin-2" value="#C6487E">#C6487E</option>
-                                        <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-                                    </select>
-                                </div>
-                                <span>&nbsp; Choose Skin</span>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-add-container">
-                                    Inside
-                                    <b>.container</b>
-                                </label>
-                            </div>
-                        </div><!-- /.pull-left -->
-
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-                            </div>
-                        </div><!-- /.pull-left -->
-                    </div><!-- /.ace-settings-box -->
-                </div><!-- /.ace-settings-container -->
-
+               
                 <form  action="{{route('user-store')}}" method="POST" class="form-horizontal" role="form" onsubmit="return validate()">
                 @csrf
                     <!-- New Design  -->
@@ -93,7 +27,7 @@
                             <div class="col-md-3">
                             <div class="form-group">
                                     <label class="control-label" for="name"> Name </label>
-                                    <input type="text" id="name" name="name" placeholder="Username" class="form-control" />
+                                    <input type="text" id="name" name="name" value="{{$data[0]->name}}" placeholder="Username" class="form-control" />
                                     @if ($errors->has('name'))
                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                     @endif
@@ -101,25 +35,12 @@
                             </div>
                             <div class="col-md-3">
                             <label class="control-label" for="name"> Email </label>
-                            <input type="text" id="email" name="email" placeholder="E-mail" class="form-control" />
+                            <input type="text" id="email" name="email" value="{{$data[0]->email}}" placeholder="E-mail" class="form-control" />
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
                             </div>
-                            <div class="col-md-3">
-                            <label class="control-label" for="name"> Password </label>
-                            <input type="password" id="password" name="password" placeholder="Password" class="form-control" />
-                            @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
-                            </div>
-                            <div class="col-md-3">
-                            <label class="control-label" for="name"> Confirm Password </label>
-                            <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password" class="form-control" />
-                            @if ($errors->has('cpassword'))
-                                <span class="text-danger">{{ $errors->first('cpassword') }}</span>
-                            @endif
-                            </div>
+                           
                         </div>
                     </div>    
                     
@@ -128,7 +49,7 @@
                         <!-- <div class="form-group"> -->
                             <div class="col-md-4">
                                 <label class="control-label" for="name"> Phone no. </label>
-                                    <input type="text" id="phone" name="phone" placeholder="Phone no." class="form-control" />
+                                    <input type="text" id="phone" name="phone" value="{{$data[0]->phone_no}}" placeholder="Phone no." class="form-control" />
                                     @if ($errors->has('phone'))
                                             <span class="text-danger">{{ $errors->first('phone') }}</span>
                                     @endif
@@ -138,7 +59,7 @@
                                 <select class="form-control" name="role" id="role">
                                     <option value="">Please Select</option>
                                     @foreach( $allRole as $allRoleV )
-                                    <option value="{{$allRoleV->id}}">{{$allRoleV->name}}</option>
+                                    <option value="{{$allRoleV->id}}" {{($data[0]->role_id == $allRoleV->id)?'selected':''}} >{{$allRoleV->name}}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('role'))
@@ -163,7 +84,7 @@
                             <select class="form-control" name="state" id="state">
                                                 <option value="">Please Select</option>
                                                 @foreach( $allState as $allStateV )
-                                                <option value="{{$allStateV->id}}">{{$allStateV->name}}</option>
+                                                <option value="{{$allStateV->id}}" {{($data[0]->state_id == $allStateV->id)?'selected':''}}>{{$allStateV->name}}</option>
                                                 @endforeach
                                 </select>
                                 @if ($errors->has('state'))
@@ -172,14 +93,22 @@
                             </div>
                             <div class="col-md-4">
                             <label class="control-label" for="name"> City </label>
-                            <select class="form-control" name="city" id="city"></select>
+                            <select class="form-control" name="city" id="city">
+                                @foreach( $city->getCities($data[0]->state_id) as $allCityV )
+                                    <option value="{{$allCityV->id}}" {{($data[0]->city_id == $allCityV->id)?'selected':''}}>{{$allCityV->name}}</option>
+                                @endforeach
+                            </select>
                             @if ($errors->has('city'))
                                     <span class="text-danger">{{ $errors->first('city') }}</span>
                             @endif
                             </div>
                             <div class="col-md-4">
                             <label class="control-label" for="name"> Zone </label>
-                            <select class="form-control" name="zone" id="zone"></select>
+                            <select class="form-control" name="zone" id="zone">
+                            @foreach( $zone->getZones($data[0]->state_id) as $allZoneV )
+                                    <option value="{{$allZoneV->id}}" {{($data[0]->zone_id == $allZoneV->id)?'selected':''}}>{{$allZoneV->name}}</option>
+                            @endforeach
+                            </select>
                             @if ($errors->has('zone'))
                                     <span class="text-danger">{{ $errors->first('zone') }}</span>
                             @endif
@@ -327,9 +256,9 @@
 @section("post_script")
 <script type="text/javascript">
         $(document).ready(function () {
-            if(!ace.vars['touch']) {
-					$('.chosen-select').chosen({allow_single_deselect:true}); 
-            }
+            // if(!ace.vars['touch']) {
+			// 		$('.chosen-select').chosen({allow_single_deselect:true}); 
+            // }
 
             $('#role').on('change', function () {
                 var roleId = this.value;
@@ -357,6 +286,7 @@
             });
 
             $('#state').on('change', function () {
+               
                 var stateId = this.value;
                 $('#city').html('');
                 $.ajax({
