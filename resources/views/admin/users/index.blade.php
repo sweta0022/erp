@@ -154,7 +154,7 @@
                                                 <td>{{$usersV->email}}</td>
                                                 <td class="hidden-480">{{$usersV->phone_no}}</td>
                                                 <td>{{$usersV->role->name}}</td>
-                                                <td>seniors</td>
+                                                <td> @foreach($usersV->senior as $value) {{$value->username($value->senior_id)->name}}, @endforeach</td>
                                                 <td>{{$usersV->state->name}}</td>
                                                 <td>{{$usersV->city->name}}</td>
                                                 <td>{{$usersV->zone->name}}</td>

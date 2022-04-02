@@ -12,7 +12,7 @@
                     <li>
                         <a href="{{url('/users')}}">Users</a>
                     </li>
-                    <li class="active"> Create </li>
+                    <li class="active"> Edit </li>
                 </ul><!-- /.breadcrumb -->
 
         </div>
@@ -69,7 +69,11 @@
                             <div class="col-md-4">
                                 <label class="control-label" for="senior"> Senior </label>
                                 <!-- <select class="form-control chosen-select" data-placeholder="Choose a senior..." name="senior" multiple="" id="senior"> -->
-                                <select class="form-control" data-placeholder="Choose a senior..." name="senior[]" multiple="" id="senior"></select>
+                                <select class="form-control" data-placeholder="Choose a senior..." name="senior[]" multiple="" id="senior">
+                                @foreach($data[0]->senior as $value) 
+                                    <option value="{{$value->username($value->senior_id)->id}}" selected >{{$value->username($value->senior_id)->name}}</option>
+                                @endforeach
+                                </select>
                                 @if ($errors->has('senior'))
                                     <span class="text-danger">{{ $errors->first('senior') }}</span>
                                 @endif

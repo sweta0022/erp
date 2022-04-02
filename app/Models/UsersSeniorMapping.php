@@ -13,4 +13,22 @@ class UsersSeniorMapping extends Model
         'status',
     ];
 
+    public function getSeniors()
+    {
+
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function username($id)
+    {
+        
+        return User::where('id',$id)->first(['name','id']);
+    }
+
+  
+
 }

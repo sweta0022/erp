@@ -20,6 +20,12 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+        // $user = User::find(4);	
+        // foreach( $user->senior as $v )
+        // {
+        //     dd($v->username($v->senior_id));
+        // }
+
         $role = Role::where('name','like','ADMIN')->first();
         $search = $request->search;
         $users = User::where('role_id','!=', $role->id)->select('users.*');

@@ -74,8 +74,10 @@ class User extends Authenticatable
     }
     
 
-    // public function senior()
-    // {
-    //     return $this->belongsToMany(User::class, 'users_senior_mappings');
-    // }
+    public function senior()
+    {
+        return $this->hasMany(UsersSeniorMapping::class);
+    }
+
+    
 }
