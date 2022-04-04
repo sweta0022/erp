@@ -41,4 +41,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/user/status/change/{id}', [App\Http\Controllers\UserController::class, 'statusChange'])->name('user-status-change');
     Route::get('/user/search', [App\Http\Controllers\UserController::class, 'search'])->name('user-search');
     Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user-edit');
+    Route::post('/user/update', [App\Http\Controllers\UserController::class, 'update'])->name('user-update');
 });

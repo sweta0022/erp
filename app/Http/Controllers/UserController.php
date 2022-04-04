@@ -126,7 +126,7 @@ class UserController extends Controller
     }
 
     public function statusChange($id)
-    {
+    {  
        $user = User::find($id);       
        if( $user )
        {
@@ -140,6 +140,77 @@ class UserController extends Controller
          return redirect('/user/list');
        }
     }
+
+    public function update(Request $request  )
+    {
+        
+         $validatedData = $request->validate([
+            'name' => 'required',
+            // 'email' => 'required|email|unique:users',
+            'phone' => 'required|digits:10',
+            'role' => 'required',
+            'senior' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+        ], [
+            'name.required' => 'Name is required',
+            // 'email.required' => 'E-mail is required'
+            // 'password.required' => 'Password is required'
+        ]); 
+
+        $update_id = $request->update_id;
+
+        if( !isset($update_id) || $update_id == '' || $update_id == 0 )
+        {
+            redirect()->back();
+        }
+
+        $name = $request->name;
+        // $email = $request->email;
+        $phone = $request->phone;
+        $role = $request->role;
+        $senior = [];
+        $senior = $request->senior;
+        $state = $request->state;
+        $city = $request->city;
+        $zone = $request->zone;
+
+        try{
+            $sqlUpdate = User::where('id',$update_id)->update([
+                'name' => $name,
+                // 'email' => $email,
+                'phone_no' => $phone,
+                'role_id' => $role,
+                'state_id' => $state,
+                'city_id' => $city,
+                'zone_id' => $zone
+            ]);
+
+            $sqlDelete = UsersSeniorMapping::where('user_id',$update_id)->delete();
+
+            if( $sqlDelete )
+            {
+              
+                foreach($senior as $seniorV)
+                {
+                    UsersSeniorMapping::create([
+                        'user_id' => $update_id,
+                        'senior_id' => $seniorV
+                    ]);
+                }
+               
+            }
+    
+            return redirect('/user/list');
+           
+        }
+        catch(Exception $e)
+        {
+            redirect()->back();
+        }
+        
+    }
+    
 
     public function search(Request $request)
     {

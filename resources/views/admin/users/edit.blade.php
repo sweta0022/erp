@@ -19,8 +19,9 @@
 
             <div class="page-content">
                
-                <form  action="{{route('user-store')}}" method="POST" class="form-horizontal" role="form" onsubmit="return validate()">
+                <form  action="{{route('user-update')}}" method="POST" class="form-horizontal" role="form" onsubmit="return validate()">
                 @csrf
+                <input type="hidden" name="update_id" value="{{$data[0]->id}}" >
                     <!-- New Design  -->
                     <div class="row">
                         <div class="clearfix form-actions">
@@ -33,13 +34,13 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                             <label class="control-label" for="name"> Email </label>
                             <input type="text" id="email" name="email" value="{{$data[0]->email}}" placeholder="E-mail" class="form-control" />
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
-                            </div>
+                            </div> -->
                            
                         </div>
                     </div>    
@@ -155,13 +156,13 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="email"> Email </label>
 
                                 <div class="col-sm-9">
                                     <input type="email" id="email" name="email" placeholder="E-mail" class="col-xs-10 col-sm-5" />
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="password"> Password </label>
@@ -235,7 +236,7 @@
                                 <div class="col-md-offset-3 col-md-9">
                                     <button class="btn btn-info" type="button">
                                         <i class="ace-icon fa fa-check bigger-110"></i>
-                                        Submit
+                                        Update
                                     </button>
 
                                     &nbsp; &nbsp; &nbsp;
