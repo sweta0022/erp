@@ -52,5 +52,14 @@
 						<b class="arrow"></b>
 					</li>
 
+					<li class="hover">
+						<a href="{{url('/item/list')}}">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> Item </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
 				</ul><!-- /.nav-list -->
 			</div>

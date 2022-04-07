@@ -210,6 +210,11 @@ class UserController extends Controller
         }
         
     }
+
+    public function delete(Request $request)
+    {
+       return redirect()->back();
+    }
     
 
     public function search(Request $request)

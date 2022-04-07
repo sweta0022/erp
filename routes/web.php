@@ -42,4 +42,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/user/search', [App\Http\Controllers\UserController::class, 'search'])->name('user-search');
     Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('user-edit');
     Route::post('/user/update', [App\Http\Controllers\UserController::class, 'update'])->name('user-update');
+    Route::post('/user/delete', [App\Http\Controllers\UserController::class, 'delete'])->name('user-delete');
+
+    //Route for Item
+    
+    Route::get('/item/list', [App\Http\Controllers\ItemController::class, 'index'])->name('items');
+    Route::get('/item/create', [App\Http\Controllers\ItemController::class, 'create'])->name('create-item');
+    Route::post('/item/store', [App\Http\Controllers\ItemController::class, 'store'])->name('item-store');
+    Route::get('/item/status/change/{id}', [App\Http\Controllers\ItemController::class, 'statusChange'])->name('item-status-change');
+    Route::get('/item/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit'])->name('item-edit');
+    Route::post('/item/update', [App\Http\Controllers\ItemController::class, 'update'])->name('item-update');
+    
 });
