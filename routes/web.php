@@ -46,10 +46,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Route for Item
     
-    Route::get('/item/list', function () {
-        return 'abc';
-    })->name('items');
-    // Route::get('/item/list', [App\Http\Controllers\ItemController::class, 'index'])->name('items');
+    // Route::get('/item/list', function () {
+    //     return 'abc';
+    // })->name('items');
+    Route::get('/item/list', [App\Http\Controllers\ItemController::class, 'index'])->name('items');
     Route::get('/item/create', [App\Http\Controllers\ItemController::class, 'create'])->name('create-item');
     Route::post('/item/store', [App\Http\Controllers\ItemController::class, 'store'])->name('item-store');
     Route::get('/item/status/change/{id}', [App\Http\Controllers\ItemController::class, 'statusChange'])->name('item-status-change');
