@@ -9,7 +9,7 @@ use App\Models\UnitMeasurement;
 use App\Models\ItemClass;
 
 
-class itemController extends Controller
+class ItemController extends Controller
 {
     public function __construct (){
         // $this->city = new City;
