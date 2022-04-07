@@ -40,16 +40,16 @@ class ItemController extends Controller
         return view('admin.items.index',compact('items'));
     }
 
-    // public function create()
-    // {
-    //     $category = Category::where('status',1)->get();
-    //     $unitMeasurement = UnitMeasurement::where('status',1)->get();
-    //     $itemclass = ItemClass::where('status',1)->get();
+    public function create()
+    {
+        $category = Category::where('status',1)->get();
+        $unitMeasurement = UnitMeasurement::where('status',1)->get();
+        $itemclass = ItemClass::where('status',1)->get();
         
        
        
-    //     return view('admin.items.create',compact('category','unitMeasurement','itemclass'));
-    // }
+        return view('admin.items.create',compact('category','unitMeasurement','itemclass'));
+    }
 
     public function store(Request $request  )
     {
