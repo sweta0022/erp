@@ -124,6 +124,10 @@
                                             <th>Unit Measurement</th>
                                             <th>Item Class</th>
                                             <th>Pcs In Box</th>
+                                            <th>MRP</th>
+                                            <th>Cost Price</th>
+                                            <th>SS Price</th>
+                                            <th>Distributor Price</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -156,6 +160,10 @@
                                                 <td>{{$itemsV->measurement_name}}</td>
                                                 <td>{{$itemsV->item_class_name}}</td>
                                                 <td>{{$itemsV->pcs_in_box}}</td>
+                                                <td>{{$itemsV->mrp}}</td>
+                                                <td>{{$itemsV->cost_price}}</td>
+                                                <td>{{$itemsV->ss_price}}</td>
+                                                <td>{{$itemsV->distributor_price}}</td>
                                                 
                                                 <td class="hidden-480">
 														<span class="label label-sm label-{{($itemsV->status)?'success':'danger'}}"> {{($itemsV->status)?'Active':'Deactive'}} </span>

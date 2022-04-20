@@ -7,6 +7,8 @@ use App\Models\ItemMaster;
 use App\Models\Category;
 use App\Models\UnitMeasurement;
 use App\Models\ItemClass;
+use App\Models\ItemPrice;
+
 
 
 class ItemController extends Controller
@@ -21,9 +23,10 @@ class ItemController extends Controller
        
         $search = $request->search;
         $items = ItemMaster::join('categories','categories.id','item_masters.category_id')
-                    ->join('unit_measurements','unit_measurements.id','item_masters.unit_measurement')
-                    ->join('item_classes','item_classes.id','item_masters.item_class')
-                    ->select('item_masters.*','categories.name as category_name','unit_measurements.name as measurement_name','item_classes.name as item_class_name');
+                    ->LeftJoin('unit_measurements','unit_measurements.id','item_masters.unit_measurement')
+                    ->LeftJoin('item_classes','item_classes.id','item_masters.item_class')
+                    ->LeftJoin('item_prices','item_prices.item_id','item_masters.id')
+                    ->select('item_masters.*','item_prices.mrp','item_prices.cost_price','item_prices.ss_price','item_prices.distributor_price','categories.name as category_name','unit_measurements.name as measurement_name','item_classes.name as item_class_name');
         if($search !== "")
         {
             
@@ -33,7 +36,7 @@ class ItemController extends Controller
             
         }
 
-        $items = $items->get();
+        $items = $items->orderBy('item_masters.id','desc')->get();
 
         // dd($items);
       
@@ -61,6 +64,10 @@ class ItemController extends Controller
             'category' => 'required',
             'item_class' => 'required',
             'pcs_in_box' => 'required|numeric',
+            'mrp' => 'required|numeric',
+            'cost_price' => 'required|numeric',
+            'ss_price' => 'required|numeric',
+            'distributor_price' => 'required|numeric',
         ], [
             'name.required' => 'Name is required',
             // 'password.required' => 'Password is required'
@@ -82,6 +89,22 @@ class ItemController extends Controller
             'pcs_in_box' => $pcs_in_box
         ]);
 
+        if($sqlCreate)
+        {
+            $mrp = $request->mrp;
+            $cost_price = $request->cost_price;
+            $ss_price = $request->ss_price;
+            $distributor_price = $request->distributor_price;
+
+            ItemPrice::create([
+                'item_id' => $sqlCreate->id,
+                'mrp' => $mrp,
+                'cost_price' => $cost_price,
+                'ss_price' => $ss_price,
+                'distributor_price' => $distributor_price,
+            ]);
+        }
+
         return redirect('/item/list');
         
     }
@@ -92,7 +115,12 @@ class ItemController extends Controller
         $unitMeasurement = UnitMeasurement::where('status',1)->get();
         $itemclass = ItemClass::where('status',1)->get();
 
-        $data = ItemMaster::join('categories','categories.id','item_masters.category_id')->join('unit_measurements','unit_measurements.id','item_masters.unit_measurement')->join('item_classes','item_classes.id','item_masters.item_class')->select('item_masters.*','categories.id as category_id','unit_measurements.id as measurement_id','item_classes.id as item_class_id')->where('item_masters.id',$id)->get();
+        $data = ItemMaster::join('categories','categories.id','item_masters.category_id')
+                    ->LeftJoin('unit_measurements','unit_measurements.id','item_masters.unit_measurement')
+                    ->LeftJoin('item_classes','item_classes.id','item_masters.item_class')
+                    ->LeftJoin('item_prices','item_prices.item_id','item_masters.id')
+                    ->select('item_masters.*','item_prices.mrp','item_prices.cost_price','item_prices.ss_price','item_prices.distributor_price','categories.id as category_id','unit_measurements.id as measurement_id','item_classes.id as item_class_id')->where('item_masters.id',$id)->get();
+
         return view('admin.items.edit',compact('data','category','unitMeasurement','itemclass'));
     }
 
@@ -106,6 +134,10 @@ class ItemController extends Controller
             'category' => 'required',
             'item_class' => 'required',
             'pcs_in_box' => 'required|numeric',
+            'mrp' => 'required|numeric',
+            'cost_price' => 'required|numeric',
+            'ss_price' => 'required|numeric',
+            'distributor_price' => 'required|numeric',
         ], [
             'name.required' => 'Name is required',
             // 'email.required' => 'E-mail is required'
@@ -124,11 +156,10 @@ class ItemController extends Controller
         $unit_measurement = $request->unit_measurement;
         $category = $request->category;
         $item_class = $request->item_class;
-        $pcs_in_box = $request->pcs_in_box;
+        $pcs_in_box = $request->pcs_in_box;     
 
-     
-
-        try{
+        try
+        {
             $sqlUpdate = ItemMaster::where('id',$update_id)->update([
                 'item_code' => $item_code,
                 'name' => $name,
@@ -137,7 +168,29 @@ class ItemController extends Controller
                 'item_class' => $item_class,
                 'pcs_in_box' => $pcs_in_box
             ]);
-           
+
+            $mrp = $request->mrp;
+            $cost_price = $request->cost_price;
+            $ss_price = $request->ss_price;
+            $distributor_price = $request->distributor_price;
+            
+            ItemPrice::where('item_id',$update_id)->delete();
+
+            ItemPrice::create([
+                'item_id' => $update_id,
+                'mrp' => $mrp,
+                'cost_price' => $cost_price,
+                'ss_price' => $ss_price,
+                'distributor_price' => $distributor_price,
+            ]);
+
+            // $sqlUpdate = ItemPrice::where('item_id',$update_id)->update([
+            //     'mrp' => $mrp,
+            //     'cost_price' => $cost_price,
+            //     'ss_price' => $ss_price,
+            //     'distributor_price' => $distributor_price
+            // ]);
+
             return redirect('/item/list');
            
         }

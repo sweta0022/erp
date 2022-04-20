@@ -166,6 +166,42 @@
                             </div>
                         </div>
                     </div> 
+
+                    <div class="row">
+                        <div class="clearfix form-actions">
+                        <!-- <div class="form-group"> -->
+                        <div class="col-md-3">
+                            <label class="control-label" for="mrp"> Mrp </label>
+                            <input type="number" id="mrp" name="mrp" value="{{$data[0]->mrp}}" placeholder="MRP" class="form-control" />
+                            @if ($errors->has('mrp'))
+                                <span class="text-danger">{{ $errors->first('mrp') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="control-label" for="cost_price"> Cost Price </label>
+                            <input type="number" id="cost_price" name="cost_price" value="{{$data[0]->cost_price}}" placeholder="Cost Price" class="form-control" />
+                            @if ($errors->has('cost_price'))
+                                <span class="text-danger">{{ $errors->first('cost_price') }}</span>
+                            @endif
+                        </div>
+
+                            <div class="col-md-3">
+                                <label class="control-label" for="ss_price"> Super Stockiest Price </label>
+                                <input type="number" id="ss_price" name="ss_price" value="{{$data[0]->ss_price}}" placeholder="Super Stockiest Price" class="form-control" />
+                                @if ($errors->has('ss_price'))
+                                    <span class="text-danger">{{ $errors->first('ss_price') }}</span>
+                                @endif
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label" for="distributor_price"> Distributor Price </label>
+                                <input type="number" id="distributor_price" value="{{$data[0]->distributor_price}}" name="distributor_price" placeholder="Distributor Price" class="form-control" />
+                                @if ($errors->has('distributor_price'))
+                                    <span class="text-danger">{{ $errors->first('distributor_price') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div> 
                   
                     <div class="clearfix form-actions">
                                 <div class="col-md-offset-3 col-md-9">
