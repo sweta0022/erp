@@ -1,6 +1,13 @@
 @extends('admin.layouts.master')
 
 @section("content")
+@section("post_css")
+    <style>
+        .update-price{
+            padding : inherit;
+        }
+    </style>
+@endsection
 
     <div class="main-content">
         <div class="main-content-inner">
@@ -14,7 +21,7 @@
                     <li>
                         <a href="{{url('/item/list')}}">Items</a>
                     </li>
-                    <li class="active"> Total Items ({{$items->count()}}) </li>
+                    <li class="active"> {{$itemPrice[0]->Item_master->name}} </li>
                 </ul><!-- /.breadcrumb -->
 
                 <div class="nav-search" id="nav-search">
@@ -98,7 +105,50 @@
 
                 <div class="page-header">
                 <div class="text-right">
-                        <a href="{{url('item/create')}}" class="btn btn-primary" style="margin-right: 45px;" >Add Item</a>
+                    <div class="row">
+                    <form method="post" action="{{route('save-item-price')}}" >
+                    @csrf
+                    <input type="hidden" name="update_id" value="{{last(request()->segments())}}" />
+                        <div class="col-md-2">
+                          
+                            <input type="number" id="mrp" name="mrp" placeholder="MRP" class="form-control" />
+                            @if ($errors->has('mrp'))
+                                <span class="text-danger">{{ $errors->first('mrp') }}</span>
+                            @endif
+                        </div>
+
+                            <div class="col-md-2">
+                            
+                                <input type="number" id="cost_price" name="cost_price" placeholder="Cost Price" class="form-control" />
+                                @if ($errors->has('cost_price'))
+                                    <span class="text-danger">{{ $errors->first('cost_price') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="col-md-2">
+                                  
+                                    <input type="number" id="ss_price" name="ss_price" placeholder="Super Stockiest Price" class="form-control" />
+                                    @if ($errors->has('ss_price'))
+                                        <span class="text-danger">{{ $errors->first('ss_price') }}</span>
+                                    @endif
+                            </div>
+                            <div class="col-md-2">
+                                   
+                                    <input type="number" id="distributor_price" name="distributor_price" placeholder="Distributor Price" class="form-control" />
+                                    @if ($errors->has('distributor_price'))
+                                        <span class="text-danger">{{ $errors->first('distributor_price') }}</span>
+                                    @endif
+                            </div>
+                            <div class="col-md-2">
+                                  
+                              <button type="submit" class="btn btn-primary update-price" >Add </button>
+                            </div>
+                            <div class="col-md-2">
+                               
+                            </div>
+                      
+                    </form>
+                    </div> 
                 </div>
                 </div><!-- /.page-header -->
 
@@ -118,14 +168,6 @@
                                             </th> -->
                                             {{-- <th class="detail-col">Detail</th> --}}
                                             <th>S.No</th>
-                                            <th>Item Code</th>
-                                            <th>Name</th>
-                                            <th>Category</th>
-                                            <th>Unit Measurement</th>
-                                            <th>Item Class</th>
-                                            <th>HSN Code</th>
-                                            <th>GST (%)</th>
-                                            <th>Pcs In Box</th>
                                             <th>MRP</th>
                                             <th>Cost Price</th>
                                             <th>SS Price</th>
@@ -136,7 +178,7 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach($items as $key => $itemsV)
+                                        @foreach($itemPrice as $key => $itemsV)
                                             <tr>
                                                 <!-- <td class="center">
                                                     <label class="pos-rel">
@@ -154,16 +196,6 @@
                                                     </div>
                                                 </td> --}}
                                                     <td>{{++$key}}</td>
-                                                <td>
-                                                    <a href="#">{{$itemsV->item_code}}</a>
-                                                </td>
-                                                <td>{{$itemsV->name}}</td>
-                                                <td>{{$itemsV->category_name}}</td>
-                                                <td>{{$itemsV->measurement_name}}</td>
-                                                <td>{{$itemsV->item_class_name}}</td>
-                                                <td>{{$itemsV->hsn_code}}</td>
-                                                <td>{{$itemsV->gst}}</td>
-                                                <td>{{$itemsV->pcs_in_box}}</td>
                                                 <td>{{$itemsV->mrp}}</td>
                                                 <td>{{$itemsV->cost_price}}</td>
                                                 <td>{{$itemsV->ss_price}}</td>
@@ -176,18 +208,14 @@
                                                 <td>
                                                     <div class="hidden-sm hidden-xs btn-group">
                                                       
-                                                        <a href="{{url('item/status/change')}}/{{$itemsV->id}}" title="Change Status"  class="btn btn-xs btn-{{($itemsV->status)?'danger':'success'}}">
+                                                        <a href="{{url('item/price/status/change')}}/{{$itemsV->id}}" title="Change Status"  class="btn btn-xs btn-{{($itemsV->status)?'danger':'success'}}">
                                                             <i class="ace-icon fa fa-{{($itemsV->status)?'close':'check'}} bigger-120"></i></a> 
 
-                                                        <a href="{{url('item/edit')}}/{{$itemsV->id}}" title="Edit"  class="btn btn-xs btn-info">
+                                                        <a onclick="openEditModal({{$itemsV->id}},{{$itemsV->mrp}},{{$itemsV->cost_price}},{{$itemsV->ss_price}},{{$itemsV->distributor_price}})" title="Edit"  class="btn btn-xs btn-info">
                                                         <i class="ace-icon fa fa-pencil bigger-120"></i></a> 
 
-                                                        <a href="{{url('item/price')}}/{{$itemsV->id}}" title="View Price"  class="btn btn-xs btn-info">
-                                                        <i class="ace-icon fa fa-eye bigger-120"></i></a> 
-                                                       
-                                                       
-                                                    </a> 
-
+                                                        <!-- <a data-toggle="modal" data-target="#editMOdal" title="Edit"  class="btn btn-xs btn-info">
+                                                        <i class="ace-icon fa fa-pencil bigger-120"></i></a>  -->
 
                                                     </div>
 
@@ -345,6 +373,62 @@
         </div>
     </div><!-- /.main-content -->
 
+    <!-- edit modal start -->
+    <div class="modal fade" id="editMOdal" tabindex="-1" role="dialog" aria-labelledby="editMOdalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editMOdalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post" action="{{route('update-item-price')}}">
+          @csrf
+          <input type="hidden" name="item_id" id="item_id" value="">
+      <div class="modal-body">
+       
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Mrp:</label>
+                    <input type="number" name="mrp" required placeholder="MRP" id="update_mrp" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Cost Price:</label>
+                    <input type="number" name="cost_price" required placeholder="Cost price" id="update_cost_price" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">SS Stockiest:</label>
+                    <input type="number" name="ss_price" required placeholder="SS price" id="update_ss_price" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Distributor Price:</label>
+                    <input type="number" name="distributor_price" required placeholder="Distributor price"  id="update_distributor_price" class="form-control">
+                    </div>
+                </div>
+               
+            
+            </div>
+         
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+    <!-- edit modal ends -->
+
        
 @endsection
 @section('post_script')
@@ -354,6 +438,17 @@
 					$(this).closest('tr').next().toggleClass('open');
 					$(this).find(ace.vars['.icon']).toggleClass('fa-angle-double-down').toggleClass('fa-angle-double-up');
     });
+
+    // open edit modal
+    function openEditModal(id,mrp,cost_price,ss_price,distributor_price)
+    {
+        $('#item_id').val(id);
+        $('#update_mrp').val(mrp);
+        $('#update_cost_price').val(cost_price);
+        $('#update_ss_price').val(ss_price);
+        $('#update_distributor_price').val(distributor_price);
+        $('#editMOdal').modal('show');//alert(id);
+    }
 
    
 </script>

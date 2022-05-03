@@ -14,7 +14,7 @@
                     <li>
                         <a href="{{url('/item/list')}}">Items</a>
                     </li>
-                    <li class="active"> Total Items ({{$items->count()}}) </li>
+                    <li class="active"> Total Items () </li>
                 </ul><!-- /.breadcrumb -->
 
                 <div class="nav-search" id="nav-search">
@@ -98,7 +98,7 @@
 
                 <div class="page-header">
                 <div class="text-right">
-                        <a href="{{url('item/create')}}" class="btn btn-primary" style="margin-right: 45px;" >Add Item</a>
+                        <a href="{{url('item/create')}}" class="btn btn-primary" style="margin-right: 45px;" >Add Order</a>
                 </div>
                 </div><!-- /.page-header -->
 
@@ -124,7 +124,7 @@
                                             <th>Unit Measurement</th>
                                             <th>Item Class</th>
                                             <th>HSN Code</th>
-                                            <th>GST (%)</th>
+                                            <th>GST In Percentage</th>
                                             <th>Pcs In Box</th>
                                             <th>MRP</th>
                                             <th>Cost Price</th>
@@ -181,12 +181,6 @@
 
                                                         <a href="{{url('item/edit')}}/{{$itemsV->id}}" title="Edit"  class="btn btn-xs btn-info">
                                                         <i class="ace-icon fa fa-pencil bigger-120"></i></a> 
-
-                                                        <a href="{{url('item/price')}}/{{$itemsV->id}}" title="View Price"  class="btn btn-xs btn-info">
-                                                        <i class="ace-icon fa fa-eye bigger-120"></i></a> 
-                                                       
-                                                       
-                                                    </a> 
 
 
                                                     </div>

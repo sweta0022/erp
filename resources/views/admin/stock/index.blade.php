@@ -14,7 +14,7 @@
                     <li>
                         <a href="{{url('/item/list')}}">Items</a>
                     </li>
-                    <li class="active"> Total Items ({{$items->count()}}) </li>
+                    <li class="active"> Total Items ({{$stock->count()}}) </li>
                 </ul><!-- /.breadcrumb -->
 
                 <div class="nav-search" id="nav-search">
@@ -98,7 +98,7 @@
 
                 <div class="page-header">
                 <div class="text-right">
-                        <a href="{{url('item/create')}}" class="btn btn-primary" style="margin-right: 45px;" >Add Item</a>
+                        <a href="{{url('stock/create')}}" class="btn btn-primary" style="margin-right: 45px;" >Add Stock</a>
                 </div>
                 </div><!-- /.page-header -->
 
@@ -136,7 +136,7 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach($items as $key => $itemsV)
+                                        @foreach($stock as $key => $itemsV)
                                             <tr>
                                                 <!-- <td class="center">
                                                     <label class="pos-rel">

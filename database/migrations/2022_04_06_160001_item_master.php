@@ -20,7 +20,9 @@ class ItemMaster extends Migration
             $table->integer('unit_measurement');
             $table->integer('category_id');
             $table->string('type')->nullable();
+            $table->string('hsn_code')->nullable();
             $table->integer('item_class');
+            $table->integer('gst');
             $table->integer('pcs_in_box');
             $table->tinyInteger('status')->default(1)->comment('1 AS ACTIVE; 0 AS INACTIVE');
             $table->timestamps();

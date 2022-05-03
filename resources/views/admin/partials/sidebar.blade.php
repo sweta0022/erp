@@ -61,5 +61,23 @@
 						<b class="arrow"></b>
 					</li>
 
+					<li class="hover">
+						<a href="{{url('/stock/list')}}">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> Stock </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="hover">
+						<a href="{{url('/user/purchase-order')}}">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text"> Purchase Order </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
 				</ul><!-- /.nav-list -->
 			</div>

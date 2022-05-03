@@ -91,7 +91,7 @@
                     <!-- New Design  -->
                     <div class="row">
                         <div class="clearfix form-actions">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label" for="item_code"> Item Code </label>
                                     <input type="text" id="item_code" name="item_code" value="{{$data[0]->item_code}}" placeholder="Item Code" class="form-control" />
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label" for="name"> Name </label>
                                     <input type="text" id="name" name="name" value="{{$data[0]->name}}" placeholder="Name" class="form-control" />
@@ -111,7 +111,13 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <label class="control-label" for="hsn_code"> HSN Code </label>
+                                <input type="text" id="hsn_code" name="hsn_code" value="{{$data[0]->hsn_code}}" placeholder="HSN Code" class="form-control" />
+                                
+                            </div>
+
+                            <div class="col-md-3">
                                 <label class="control-label" for="unit_measurement"> Unit Measurement </label>
                                 <select class="form-control" name="unit_measurement" id="unit_measurement">
                                     <option value="">Please Select</option>
@@ -132,7 +138,7 @@
                     <div class="row">
                         <div class="clearfix form-actions">
                         <!-- <div class="form-group"> -->
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                                 <label class="control-label" for="category"> Category </label>
                                 <select class="form-control" name="category" id="category">
                                     <option value="">Please Select</option>
@@ -145,7 +151,7 @@
                                 @endif
                         </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                 <label class="control-label" for="item_class"> Item Class </label>
                                 <select class="form-control" name="item_class" id="item_class">
                                     <option value="">Please Select</option>
@@ -157,7 +163,18 @@
                                             <span class="text-danger">{{ $errors->first('item_class') }}</span>
                                 @endif
                             </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-3">
+                                     <label class="control-label" for="gst"> GST In Percentage </label>
+                                     <select class="form-control" name="gst" id="gst">
+                                        @foreach( $gst as $gstV )
+                                        <option value="{{$gstV->id}}" {{($data[0]->gst == $gstV->id)?'selected':'' }} >{{$gstV->value}}</option>
+                                        @endforeach
+                                    </select>
+                                   
+                            </div>
+
+                            <div class="col-md-3">
                                      <label class="control-label" for="pcs_in_box"> Pcs in box </label>
                                     <input type="number" id="pcs_in_box" value="{{$data[0]->pcs_in_box}}" name="pcs_in_box" placeholder="Quantity" class="form-control" />
                                     @if ($errors->has('pcs_in_box'))

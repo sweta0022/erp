@@ -16,26 +16,26 @@ class GstSeeder extends Seeder
     {
         DB::table('gst_masters')->insert([
             'value' => 0,
-            'created_at' => date('Ymdhis'), 
-            'updated_at' => date('Ymdhis'),
+            'created_at' => date('Y-m-d h:i:s'), 
+            'updated_at' => date('Y-m-d h:i:s'),
         ]);
 
         DB::table('gst_masters')->insert([
             'value' => 5,
-            'created_at' => date('Ymdhis'), 
-            'updated_at' => date('Ymdhis'),
+            'created_at' => date('Y-m-d h:i:s'), 
+            'updated_at' => date('Y-m-d h:i:s'),
         ]);
 
         DB::table('gst_masters')->insert([
             'value' => 12,
-            'created_at' => date('Ymdhis'), 
-            'updated_at' => date('Ymdhis'),
+            'created_at' => date('Y-m-d h:i:s'), 
+            'updated_at' => date('Y-m-d h:i:s'),
         ]);
 
         DB::table('gst_masters')->insert([
             'value' => 18,
-            'created_at' => date('Ymdhis'), 
-            'updated_at' => date('Ymdhis'),
+            'created_at' => date('Y-m-d h:i:s'), 
+            'updated_at' => date('Y-m-d h:i:s'),
         ]);
     }
 }

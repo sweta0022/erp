@@ -55,5 +55,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/item/status/change/{id}', [App\Http\Controllers\ItemController::class, 'statusChange'])->name('item-status-change');
     Route::get('/item/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit'])->name('item-edit');
     Route::post('/item/update', [App\Http\Controllers\ItemController::class, 'update'])->name('item-update');
+    Route::get('/item/price/{id}', [App\Http\Controllers\ItemController::class, 'item_price'])->name('item-view-price');
+    Route::post('/item/price/save', [App\Http\Controllers\ItemController::class, 'save_item_price'])->name('save-item-price');
+    Route::get('item/price/status/change/{id}', [App\Http\Controllers\ItemController::class, 'statusChangeItemPrice'])->name('item-price-status-change');
+    Route::post('/item/price/update', [App\Http\Controllers\ItemController::class, 'update_item_price'])->name('update-item-price');
+    
+
+    // Route for Stock
+    Route::get('/stock/list', [App\Http\Controllers\StockController::class, 'index'])->name('stocks');
+    Route::get('/stock/create', [App\Http\Controllers\StockController::class, 'create'])->name('create-stock');
+    
+    //PURCHASE ORDER ROUTES
+    Route::get('/user/purchase-order', [App\Http\Controllers\PurchaseOrderController::class, 'index'])->name('items');
     
 });

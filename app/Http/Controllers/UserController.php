@@ -162,7 +162,7 @@ class UserController extends Controller
 
         if( !isset($update_id) || $update_id == '' || $update_id == 0 )
         {
-            redirect()->back();
+            return redirect()->back();
         }
 
         $name = $request->name;
@@ -206,7 +206,7 @@ class UserController extends Controller
         }
         catch(Exception $e)
         {
-            redirect()->back();
+            return  redirect()->back();
         }
         
     }

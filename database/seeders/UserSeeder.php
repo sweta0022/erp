@@ -23,8 +23,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => date('Ymdhis'),
             'password' => Hash::make('Admin@123'),
             'role_id' => $role_id,
-            'created_at' => date('Ymdhis'), 
-            'updated_at' => date('Ymdhis'),
+            'created_at' => date('Y-m-d h:i:s'), 
+            'updated_at' => date('Y-m-d h:i:s'),
         ]);
     }
 }
