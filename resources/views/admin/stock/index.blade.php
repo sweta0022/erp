@@ -29,72 +29,7 @@
             </div>
 
             <div class="page-content">
-                <div class="ace-settings-container" id="ace-settings-container">
-                    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-                        <i class="ace-icon fa fa-cog bigger-130"></i>
-                    </div>
-
-                    <div class="ace-settings-box clearfix" id="ace-settings-box">
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <div class="pull-left">
-                                    <select id="skin-colorpicker" class="hide">
-                                        <option data-skin="no-skin" value="#438EB9">#438EB9</option>
-                                        <option data-skin="skin-1" value="#222A2D">#222A2D</option>
-                                        <option data-skin="skin-2" value="#C6487E">#C6487E</option>
-                                        <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-                                    </select>
-                                </div>
-                                <span>&nbsp; Choose Skin</span>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-navbar" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-sidebar" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-breadcrumbs" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2 ace-save-state" id="ace-settings-add-container" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-add-container">
-                                    Inside
-                                    <b>.container</b>
-                                </label>
-                            </div>
-                        </div><!-- /.pull-left -->
-
-                        <div class="pull-left width-50">
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-                            </div>
-
-                            <div class="ace-settings-item">
-                                <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" autocomplete="off" />
-                                <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-                            </div>
-                        </div><!-- /.pull-left -->
-                    </div><!-- /.ace-settings-box -->
-                </div><!-- /.ace-settings-container -->
+               
 
                 <div class="page-header">
                 <div class="text-right">
@@ -118,19 +53,10 @@
                                             </th> -->
                                             {{-- <th class="detail-col">Detail</th> --}}
                                             <th>S.No</th>
-                                            <th>Item Code</th>
-                                            <th>Name</th>
-                                            <th>Category</th>
-                                            <th>Unit Measurement</th>
-                                            <th>Item Class</th>
-                                            <th>HSN Code</th>
-                                            <th>GST (%)</th>
-                                            <th>Pcs In Box</th>
-                                            <th>MRP</th>
-                                            <th>Cost Price</th>
-                                            <th>SS Price</th>
-                                            <th>Distributor Price</th>
-                                            <th>Status</th>
+                                            <th>Item Name</th>
+                                            <th>Batch Number</th>
+                                            <th>Item MRP</th>
+                                            <th>Stock</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -155,39 +81,16 @@
                                                 </td> --}}
                                                     <td>{{++$key}}</td>
                                                 <td>
-                                                    <a href="#">{{$itemsV->item_code}}</a>
+                                                    <a href="#">{{$itemsV->name}}</a>
                                                 </td>
-                                                <td>{{$itemsV->name}}</td>
-                                                <td>{{$itemsV->category_name}}</td>
-                                                <td>{{$itemsV->measurement_name}}</td>
-                                                <td>{{$itemsV->item_class_name}}</td>
-                                                <td>{{$itemsV->hsn_code}}</td>
-                                                <td>{{$itemsV->gst}}</td>
-                                                <td>{{$itemsV->pcs_in_box}}</td>
+                                                <td>{{$itemsV->batch_number}}</td>
                                                 <td>{{$itemsV->mrp}}</td>
-                                                <td>{{$itemsV->cost_price}}</td>
-                                                <td>{{$itemsV->ss_price}}</td>
-                                                <td>{{$itemsV->distributor_price}}</td>
-                                                
-                                                <td class="hidden-480">
-														<span class="label label-sm label-{{($itemsV->status)?'success':'danger'}}"> {{($itemsV->status)?'Active':'Deactive'}} </span>
-												</td>
-
+                                                <td>{{$itemsV->stock_in_quantity}}</td>
                                                 <td>
                                                     <div class="hidden-sm hidden-xs btn-group">
-                                                      
-                                                        <a href="{{url('item/status/change')}}/{{$itemsV->id}}" title="Change Status"  class="btn btn-xs btn-{{($itemsV->status)?'danger':'success'}}">
-                                                            <i class="ace-icon fa fa-{{($itemsV->status)?'close':'check'}} bigger-120"></i></a> 
-
+                                               
                                                         <a href="{{url('item/edit')}}/{{$itemsV->id}}" title="Edit"  class="btn btn-xs btn-info">
                                                         <i class="ace-icon fa fa-pencil bigger-120"></i></a> 
-
-                                                        <a href="{{url('item/price')}}/{{$itemsV->id}}" title="View Price"  class="btn btn-xs btn-info">
-                                                        <i class="ace-icon fa fa-eye bigger-120"></i></a> 
-                                                       
-                                                       
-                                                    </a> 
-
 
                                                     </div>
 

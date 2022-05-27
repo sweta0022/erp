@@ -20,8 +20,8 @@ class Stock extends Migration
             $table->string('batch_number'); 
             $table->integer('item_price_id'); 
             $table->integer('stock_in_quantity'); 
-            $table->integer('wastage_quantity'); 
-            $table->integer('outward_quantity'); 
+            $table->integer('wastage_quantity')->nullable();; 
+            $table->integer('outward_quantity')->nullable();; 
             $table->timestamps();
         });
     }

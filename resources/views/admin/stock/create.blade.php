@@ -85,7 +85,7 @@
                     </div><!-- /.ace-settings-box -->
                 </div><!-- /.ace-settings-container -->
 
-                <form  action="{{route('user-store')}}" method="POST" class="form-horizontal" role="form" onsubmit="return validate()">
+                <form  action="{{route('stock-store')}}" method="POST" class="form-horizontal" role="form" onsubmit="return validate()">
                 @csrf
                 <table class="table">
                     <thead>
@@ -100,15 +100,15 @@
                     <tbody>
                         @foreach( $itemMaster as $val )
                         <tr>
-                            <td>{{$val->name}}</td>
+                            <td>{{$val->name}} <input type="hidden" name="id[]" value="{{$val->id}}" /> </td>
                             <td><input type="text" name="batch_num[]" placeholder="Batch No." /></td>
                             <td> 
                                 <select name="mrp[]"> 
                                     @if($val->item_price->count() > 1)
-                                    <option value="">Please Select</option>
+                                    <option value="0">Please Select</option>
                                     @endif
                                     @foreach( $val->item_price as $price )
-                                    <option value="">{{$price->mrp}}</option>
+                                    <option value="{{$price->id}}">{{$price->mrp}}</option>
                                     @endforeach
                                 </select>
                             </td>
@@ -121,6 +121,10 @@
                             </td>
                         </tr>
                         @endforeach
+                        <tr>
+                            <td colspan="5"> <button type="submit" style="float:right" class="btn btn-primary" >Update</button></td>
+                        </tr>
+                       
                     </tbody>
                 </table>
 
