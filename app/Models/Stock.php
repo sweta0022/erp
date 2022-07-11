@@ -13,6 +13,7 @@ class Stock extends Model
         'item_id',
         'batch_number',
         'item_price_id',
+        'mrp',
         'stock_in_quantity',
         'wastage_quantity',
         'outward_quantity'

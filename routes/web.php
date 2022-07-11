@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/stock/list', [App\Http\Controllers\StockController::class, 'index'])->name('stocks');
     Route::get('/stock/create', [App\Http\Controllers\StockController::class, 'create'])->name('create-stock');
     Route::post('/stock/store', [App\Http\Controllers\StockController::class, 'store'])->name('stock-store');
+    Route::post('/stock/mrp-wise-detail', [App\Http\Controllers\StockController::class, 'mrpWiseDetail'])->name('mrp-wise-detail');
     
     //PURCHASE ORDER ROUTES
     Route::get('/user/purchase-order', [App\Http\Controllers\PurchaseOrderController::class, 'index'])->name('items');
